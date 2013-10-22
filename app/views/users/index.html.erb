@@ -1,0 +1,9 @@
+<h1>Gay Users</h1>
+<% @users.each do |user|  %>
+	<li>
+	  <%= user.name %> is gay.
+	  Now I have your email. <%= user.email %>
+	  <%= link_to "delete", user, method: :delete, 
+	  	data: { confirm: "You sure?" } %>
+	</li>
+<% end %>
