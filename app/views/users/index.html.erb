@@ -1,9 +1,15 @@
-<h1>Gay Users</h1>
+<h1>Users</h1>
 <% @users.each do |user|  %>
 	<li>
-	  <%= user.name %> is gay.
-	  Now I have your email. <%= user.email %>
+	  <%= link_to image_tag(user.picture), user %>
+	  <%= link_to user.name, user %>
+	  <% if user.facebook.get_object("me").has_key?("location") %>
+	  	from <%= user.facebook.get_object("me")["location"]["name"] %>
+	  <% end %>
+	  <%= user.email %>
 	  <%= link_to "delete", user, method: :delete, 
 	  	data: { confirm: "You sure?" } %>
 	</li>
 <% end %>
+
+<%= @locations %>

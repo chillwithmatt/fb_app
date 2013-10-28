@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+
+  has_many :microposts
+
 	def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider = auth.provider
@@ -18,4 +21,10 @@ class User < ActiveRecord::Base
     logger.info e.to_s
     nil
   end
+
+  def picture
+    facebook { |fb| fb.get_picture("me") }
+  end
+
+
 end
